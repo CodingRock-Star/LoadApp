@@ -2,4 +2,7 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="default_text_size">20sp</dimen>
+    <dimen name="default_style_size">0dp</dimen>
+    <dimen name="textsize">55dp</dimen>
+    <dimen name="stokewidth">0dp</dimen>
 </resources>
