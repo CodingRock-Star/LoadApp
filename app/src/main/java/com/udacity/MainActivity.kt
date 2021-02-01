@@ -31,11 +31,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var notificationManager: NotificationManager
 
     private var URL = " "
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        retrofit.isChecked = false
+        load.isChecked = false
+        glide.isChecked = false
 
         createChannel(
             CHANNEL_ID,
@@ -48,46 +52,13 @@ class MainActivity : AppCompatActivity() {
         }
         custombutton.setOnClickListener {
             when {
-                glide.isChecked -> {
-                    customurl.visibility= View.GONE
-                    customurl.isEnabled=false
-                    URL = applicationContext.getString(R.string.glideUrl)
-                    fileName = getString(R.string.glide)
-                    download()
-                }
-                load.isChecked -> {
-                    customurl.visibility= View.GONE
-                    customurl.isEnabled=false
-                    URL =
-                        applicationContext.getString(R.string.loadurl)
-                    fileName = getString(R.string.load)
-                    download()
-                }
-                retrofit.isChecked -> {
-                    customurl.visibility= View.GONE
-                    customurl.isEnabled=false
-                    URL = applicationContext.getString(R.string.retrofiturl)
-                    fileName = getString(R.string.retrofit)
-                    download()
-                }
-                else -> {
-                    customurl.visibility= View.GONE
-                    customurl.isEnabled=false
-                    Toast.makeText(
-                        this,
-                        applicationContext.getString(R.string.select),
-                        Toast.LENGTH_LONG
-                    ).show()
-                        .toString()
-                }
-            }
-            when {
-                customurl.isEnabled->{
+                customurl.isEnabled -> {
+                    enableRadioButtons()
                     if (Util.isValidUrl(customurl.text.toString())) {
                         URL = customurl.text.toString()
                         fileName = applicationContext.resources.getString(R.string.customurltext)
                         download()
-                    } else{
+                    } else {
                         Toast.makeText(
                             this,
                             applicationContext.resources.getString(R.string.invalidurl),
@@ -96,24 +67,57 @@ class MainActivity : AppCompatActivity() {
                             .toString()
                     }
                 }
+                glide.isChecked -> {
+                    URL = applicationContext.getString(R.string.glideUrl)
+                    fileName = getString(R.string.glide)
+                    download()
+                }
+                load.isChecked -> {
+
+                    URL =
+                        applicationContext.getString(R.string.loadurl)
+                    fileName = getString(R.string.load)
+                    download()
+                }
+                retrofit.isChecked -> {
+                    URL = applicationContext.getString(R.string.retrofiturl)
+                    fileName = getString(R.string.retrofit)
+                    download()
+                }
+                else -> {
+                        Toast.makeText(
+                            this,
+                            applicationContext.getString(R.string.select),
+                            Toast.LENGTH_LONG
+                        ).show()
+                            .toString()
+
+                }
             }
-
         }
-
 
     }
 
     private fun enableAndSendCustomUrl() {
-        customurl.visibility= View.VISIBLE
-        retrofit.isChecked=false
-        load.isChecked=false
-        glide.isChecked=false
+        customurl.visibility = View.VISIBLE
+        customurl.isEnabled = true
+        retrofit.isChecked = false
+        load.isChecked = false
+        glide.isChecked = false
 
     }
 
-    private fun clearText(customurl: EditText?):Unit {
-        if(customurl?.text!=null){
-            if(customurl.text.toString().length> 0){
+    private fun enableRadioButtons() {
+        retrofit.isChecked = true
+        load.isChecked = true
+        glide.isChecked = true
+        customurl.visibility = View.GONE
+        customurl.isEnabled = false
+    }
+
+    private fun clearText(customurl: EditText?): Unit {
+        if (customurl?.text != null) {
+            if (customurl.text.toString().length > 0) {
                 customurl.text.clear()
             }
         }
@@ -191,6 +195,11 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
+    }
+
     private fun download() {
         val request =
             DownloadManager.Request(Uri.parse(URL))
@@ -206,11 +215,6 @@ class MainActivity : AppCompatActivity() {
             downloadManager!!.enqueue(request)// enqueue puts the download request in the queue.
 
 
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        unregisterReceiver(receiver)
     }
 
     companion object {
