@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_layout"
-    android:background="@color/colorAccent"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -12,41 +12,57 @@
 
     <TextView
         android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/header"
         android:textSize="@dimen/dimen30"
         android:textStyle="bold"
-        android:text="@string/header"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/customurl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/customurl"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:ellipsize="start"
+
         android:layout_marginTop="@dimen/dimen20"
         android:layout_height="wrap_content"
         android:hint="@string/customurl"
         android:inputType="text"
         android:textAllCaps="true"
-        android:textSize="@dimen/dimen30"
+        android:textSize="@dimen/dimen25"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/radiobuttons"
+        app:layout_constraintBottom_toTopOf="@+id/buttonenable"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/buttonenable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/sendcustomurl"
+        android:textSize="@dimen/dimen20"
+        app:layout_constraintBottom_toTopOf="@+id/radiobuttons"
+        app:layout_constraintEnd_toEndOf="parent">
+
+    </Button>
 
     <RadioGroup
         android:id="@+id/radiobuttons"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_margin="16dp"
-        android:layout_marginTop="@dimen/dimen30"
+        android:layout_marginTop="@dimen/dimen50"
         android:autofillHints="Enter"
-        app:layout_constraintBottom_toTopOf="@+id/custom_button"
+        app:layout_constraintBottom_toTopOf="@+id/custombutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -80,9 +96,10 @@
     </RadioGroup>
 
     <com.udacity.LoadingButton
-        android:id="@+id/custom_button"
+        android:id="@+id/custombutton"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen50"
+        android:clickable="false"
         android:layout_marginStart="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

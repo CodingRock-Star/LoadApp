@@ -15,7 +15,7 @@
     <string name="status">downloadingStatus</string>
     <string name="notificationcontent">Downloading Application Notification</string>
     <string name="statusread">Read Status</string>
-    <string name="download">Start DownLoading</string>
+    <string name="download">START DOWNLOAD</string>
     <string name="notificationchannelname">Loading</string>
     <string name="typefacefamily">TypeFaceFamily</string>
     <string name="glide">Glide:Image Dowload </string>
@@ -31,4 +31,5 @@
     <string name="loadurl">https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter</string>
     <string name="retrofiturl">https://github.com/square/retrofit</string>
     <string name="select">Choose One Option</string>
+    <string name="sendcustomurl">Enable Custom URL</string>
 </resources>

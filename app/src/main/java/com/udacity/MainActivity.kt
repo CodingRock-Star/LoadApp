@@ -9,9 +9,13 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
 import android.net.Uri
+import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.widget.EditText
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -26,9 +30,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var notificationManager: NotificationManager
 
-    private var widgetEnabled:Boolean=false
-
     private var URL = " "
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,16 +43,51 @@ class MainActivity : AppCompatActivity() {
         )
 
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
-        custom_button.setOnClickListener {
+        buttonenable.setOnClickListener {
+            enableAndSendCustomUrl()
+        }
+        custombutton.setOnClickListener {
             when {
-                customurl.isEnabled -> {
+                glide.isChecked -> {
+                    customurl.visibility= View.GONE
+                    customurl.isEnabled=false
+                    URL = applicationContext.getString(R.string.glideUrl)
+                    fileName = getString(R.string.glide)
+                    download()
+                }
+                load.isChecked -> {
+                    customurl.visibility= View.GONE
+                    customurl.isEnabled=false
+                    URL =
+                        applicationContext.getString(R.string.loadurl)
+                    fileName = getString(R.string.load)
+                    download()
+                }
+                retrofit.isChecked -> {
+                    customurl.visibility= View.GONE
+                    customurl.isEnabled=false
+                    URL = applicationContext.getString(R.string.retrofiturl)
+                    fileName = getString(R.string.retrofit)
+                    download()
+                }
+                else -> {
+                    customurl.visibility= View.GONE
+                    customurl.isEnabled=false
+                    Toast.makeText(
+                        this,
+                        applicationContext.getString(R.string.select),
+                        Toast.LENGTH_LONG
+                    ).show()
+                        .toString()
+                }
+            }
+            when {
+                customurl.isEnabled->{
                     if (Util.isValidUrl(customurl.text.toString())) {
-                        widgetEnabled=true
                         URL = customurl.text.toString()
                         fileName = applicationContext.resources.getString(R.string.customurltext)
                         download()
-                    } else {
-                        widgetEnabled=false
+                    } else{
                         Toast.makeText(
                             this,
                             applicationContext.resources.getString(R.string.invalidurl),
@@ -58,30 +96,27 @@ class MainActivity : AppCompatActivity() {
                             .toString()
                     }
                 }
-                glide.isChecked -> {
-                    URL = applicationContext.getString(R.string.glideUrl)
-                    fileName = getString(R.string.glide)
-                    download()
-                }
-                load.isChecked -> {
-                    URL =
-                       applicationContext.getString(R.string.loadurl)
-                    fileName = getString(R.string.load)
-                    download()
-                }
-                retrofit.isChecked -> {
-                    URL =applicationContext.getString(R.string.retrofiturl)
-                    fileName = getString(R.string.retrofit)
-                    download()
-                }
-                else -> {
-                    Toast.makeText(this, applicationContext.getString(R.string.select), Toast.LENGTH_LONG).show()
-                        .toString()
-                }
-
             }
+
         }
 
+
+    }
+
+    private fun enableAndSendCustomUrl() {
+        customurl.visibility= View.VISIBLE
+        retrofit.isChecked=false
+        load.isChecked=false
+        glide.isChecked=false
+
+    }
+
+    private fun clearText(customurl: EditText?):Unit {
+        if(customurl?.text!=null){
+            if(customurl.text.toString().length> 0){
+                customurl.text.clear()
+            }
+        }
 
     }
 
@@ -110,8 +145,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-
-                custom_button.completedDownload()
+                custombutton.completedDownload()
                 sendNotification(downloadID.toInt())
 
             }

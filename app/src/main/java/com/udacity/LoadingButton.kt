@@ -47,7 +47,7 @@ class LoadingButton @JvmOverloads constructor(
         return true
     }
     init {
-        isClickable = true
+        isClickable=true
         animator = AnimatorInflater.loadAnimator(
             context, R.animator.animation_loading
         ) as ValueAnimator
@@ -63,16 +63,25 @@ class LoadingButton @JvmOverloads constructor(
         try {
             bgColor = attr.getColor(
                 R.styleable.LoadingButton_bgColor,
-                ContextCompat.getColor(context, R.color.colorPrimary)
+                ContextCompat.getColor(context, R.color.colorAccent)
             )
 
             textColor = attr.getColor(
                 R.styleable.LoadingButton_textColor,
-                ContextCompat.getColor(context, R.color.colorAccent)
+                ContextCompat.getColor(context, R.color.colorPrimaryDark)
             )
         } finally {
             attr.recycle()
         }
+    }
+
+    fun enableClickable(){
+        isClickable = true
+        isEnabled=true
+    }
+    fun disableClickable(){
+        isClickable = false
+        isEnabled=false
     }
 
     private val paintRec = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -81,7 +90,7 @@ class LoadingButton @JvmOverloads constructor(
         isDither = true
         isUnderlineText=true
         textAlign = Paint.Align.CENTER
-        textSize = 40.0f
+        textSize = 60.0f
         typeface = Typeface.create(context.getString(R.string.typefacefamily), Typeface.BOLD)
     }
 
@@ -104,12 +113,12 @@ class LoadingButton @JvmOverloads constructor(
 
         canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), paintRec)
         if (buttonState == ButtonState.Loading) {
-            paintRec.color = Color.parseColor("#004349")
+            paintRec.color = Color.parseColor("#006400")
             canvas.drawRect(
                 0f, 0f,
                 (width * (progress / 100)).toFloat(), height.toFloat(), paintRec
             )
-            paintRec.color = Color.parseColor("#F9A825")
+            paintRec.color = Color.parseColor("#2576f9")
             canvas.drawArc(rect, 0f, (360 * (progress / 100)).toFloat(), true, paintRec)
         }
         val buttonText =
