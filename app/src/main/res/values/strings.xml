@@ -16,4 +16,19 @@
     <string name="notificationcontent">Downloading Application Notification</string>
     <string name="statusread">Read Status</string>
     <string name="download">Start DownLoading</string>
+    <string name="notificationchannelname">Loading</string>
+    <string name="typefacefamily">TypeFaceFamily</string>
+    <string name="glide">Glide:Image Dowload </string>
+    <string name="retrofit">Retrofit:Square</string>
+    <string name="load">Udacity:The Programer</string>
+    <string name="customurl">Enter The Custom Url</string>
+    <string name="header">Welcome To Load App</string>
+    <string name="customurltext">The Custom Url is DownLoaded</string>
+    <string name="invalidurl">Url is not Vaild</string>
+    <string name="success">Downloading Success</string>
+    <string name="failed">DownLoading Failed</string>
+    <string name="glideUrl">https://github.com/bumptech/glide</string>
+    <string name="loadurl">https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter</string>
+    <string name="retrofiturl">https://github.com/square/retrofit</string>
+    <string name="select">Choose One Option</string>
 </resources>
