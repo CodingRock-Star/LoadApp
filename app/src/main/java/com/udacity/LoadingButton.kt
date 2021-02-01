@@ -23,7 +23,7 @@ class LoadingButton @JvmOverloads constructor(
 
     private var animator: ValueAnimator
 
-    private var buttonState: ButtonState by Delegates.observable(ButtonState.Completed) { p, old, new ->
+    private var buttonState: ButtonState by Delegates.observable(ButtonState.Clicked) { p, old, new ->
     }
 
     private val listener = ValueAnimator.AnimatorUpdateListener {
@@ -35,15 +35,19 @@ class LoadingButton @JvmOverloads constructor(
     fun completedDownload() {
         animator.cancel()
         if (buttonState == ButtonState.Loading)
-            buttonState = ButtonState.Completed
+            buttonState = ButtonState.Clicked
         invalidate()
         requestLayout()
     }
 
     override fun performClick(): Boolean {
         super.performClick()
-        if (buttonState == ButtonState.Completed) buttonState = ButtonState.Loading
-        startAnimation()
+        if (buttonState == ButtonState.Clicked && !MainActivity.URL.isEmpty()) {
+            buttonState = ButtonState.Loading
+            startAnimation()
+        }else{
+           buttonState=ButtonState.Clicked
+        }
         return true
     }
     init {

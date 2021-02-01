@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var notificationManager: NotificationManager
 
-    private var URL = " "
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +50,9 @@ class MainActivity : AppCompatActivity() {
             enableAndSendCustomUrl()
         }
         custombutton.setOnClickListener {
+            if (URL.length > 0) {
+                URL = ""
+            }
             when {
                 customurl.isEnabled -> {
                     enableRadioButtons()
@@ -85,12 +87,12 @@ class MainActivity : AppCompatActivity() {
                     download()
                 }
                 else -> {
-                        Toast.makeText(
-                            this,
-                            applicationContext.getString(R.string.select),
-                            Toast.LENGTH_LONG
-                        ).show()
-                            .toString()
+                    Toast.makeText(
+                        this,
+                        applicationContext.getString(R.string.select),
+                        Toast.LENGTH_LONG
+                    ).show()
+                        .toString()
 
                 }
             }
@@ -219,6 +221,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val CHANNEL_ID = "loadAppChannelID"
+        var URL = " "
     }
 
 }
