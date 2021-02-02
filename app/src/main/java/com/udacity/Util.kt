@@ -6,7 +6,7 @@ import android.webkit.URLUtil
 import android.widget.Toast
 
 object Util {
-    public var URL:String=";"
+     var URL:String=""
 
     fun isNetworkAvailable(context: Context): Boolean {
         val connectivityManager: ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

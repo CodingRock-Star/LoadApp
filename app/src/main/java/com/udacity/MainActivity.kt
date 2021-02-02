@@ -49,6 +49,8 @@ class MainActivity : AppCompatActivity() {
             enableAndSendCustomUrl()
         }
         custombutton.setOnClickListener {
+            //checking the internet connection...
+          //  checkInternetConnectioin()
             if (URL.length > 0) {
                 URL = ""
             }
@@ -101,6 +103,13 @@ class MainActivity : AppCompatActivity() {
             Util.setUrl(URL)
         }
 
+    }
+
+    private fun checkInternetConnectioin() {
+       if(!Util.isNetworkAvailable(applicationContext)){
+           Util.showToast(applicationContext,applicationContext.resources.getString(R.string.nointernetconnection))
+           return
+       }
     }
 
     private fun enableAndSendCustomUrl() {

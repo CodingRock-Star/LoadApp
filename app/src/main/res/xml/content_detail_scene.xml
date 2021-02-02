@@ -1,16 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+        <OnClick/>
+    </Transition>
 
     <ConstraintSet android:id="@+id/start">
-        <Constraint android:id="@+id/widget" />
+
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
-        <Constraint android:id="@id/widget" />
-    </ConstraintSet>
+        <Constraint
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:textAlignment="gravity"
+            motion:layout_constraintBottom_toTopOf="@+id/okBtn"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@+id/status_title" />
+        <Constraint
+            android:id="@+id/status_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textAlignment="gravity"
+            android:layout_marginTop="20dp"
+            motion:layout_constraintBottom_toTopOf="@+id/okBtn"
+            motion:layout_constraintStart_toStartOf="@+id/file_title" />
+        <Constraint
+            android:id="@+id/file_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textAlignment="gravity"
+            motion:layout_constraintBottom_toTopOf="@+id/status"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@+id/file_title" />
 
-    <Transition
-        app:constraintSetEnd="@id/end"
-        app:constraintSetStart="@+id/start" />
+        <Constraint
+            android:id="@+id/file_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textAlignment="gravity"
+            android:layout_marginRight="20dp"
+            motion:layout_constraintBottom_toTopOf="@+id/status_title"
+            motion:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
 </MotionScene>
