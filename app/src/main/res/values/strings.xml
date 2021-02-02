@@ -33,4 +33,9 @@
     <string name="select">Choose One Option</string>
     <string name="sendcustomurl">Enable Custom URL</string>
     <string name="loadfile">load the file</string>
+    <string name="name_of_file">File Downloaded Name</string>
+    <string name="statusTitle">Status Of File Downloaded</string>
+    <string name="confirm">Confirm</string>
+    <string name="fileName">Downloaded FileName</string>
+    <string name="detailsactivityname">Details Activity</string>
 </resources>
