@@ -36,6 +36,7 @@ class DetailActivity : AppCompatActivity() {
         okBtn.setOnClickListener {
             var intent: Intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
     }
