@@ -47,6 +47,7 @@
         android:id="@+id/buttonenable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
         android:text="@string/sendcustomurl"
         android:textSize="@dimen/dimen20"
         app:layout_constraintBottom_toTopOf="@+id/radiobuttons"

@@ -172,7 +172,6 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun createChannel(channelId: String, channelName: String) {
-        // create a channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationChannel = NotificationChannel(
                 channelId,
