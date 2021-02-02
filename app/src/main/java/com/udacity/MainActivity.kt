@@ -9,7 +9,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
 import android.net.Uri
-import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -70,18 +69,20 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 glide.isChecked -> {
+                    clearText(customurl)
                     URL = applicationContext.getString(R.string.glideUrl)
                     fileName = getString(R.string.glide)
                     download()
                 }
                 load.isChecked -> {
-
+                    clearText(customurl)
                     URL =
                         applicationContext.getString(R.string.loadurl)
                     fileName = getString(R.string.load)
                     download()
                 }
                 retrofit.isChecked -> {
+                    clearText(customurl)
                     URL = applicationContext.getString(R.string.retrofiturl)
                     fileName = getString(R.string.retrofit)
                     download()
@@ -96,6 +97,8 @@ class MainActivity : AppCompatActivity() {
 
                 }
             }
+            //setting the URL to Util.
+            Util.setUrl(URL)
         }
 
     }
@@ -155,8 +158,6 @@ class MainActivity : AppCompatActivity() {
                 sendNotification(downloadID.toInt())
 
             }
-
-
         }
     }
 
@@ -176,14 +177,12 @@ class MainActivity : AppCompatActivity() {
             notificationChannel.enableLights(true)
             notificationChannel.lightColor = Color.RED
             notificationChannel.enableVibration(true)
-            notificationChannel.description = "load the file"
+            notificationChannel.description = applicationContext.getString(R.string.loadfile)
 
             notificationManager = this.getSystemService(
                 NotificationManager::class.java
             )
             notificationManager.createNotificationChannel(notificationChannel)
-
-
         }
 
     }

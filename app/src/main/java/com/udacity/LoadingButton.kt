@@ -14,8 +14,8 @@ class LoadingButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    private var bgColor: Int = Color.GRAY
-    private var textColor: Int = Color.GRAY
+    private var bgColor: Int = Color.CYAN
+    private var textColor: Int = Color.CYAN
 
     private var widthSize = 0
     private var heightSize = 0
@@ -42,7 +42,7 @@ class LoadingButton @JvmOverloads constructor(
 
     override fun performClick(): Boolean {
         super.performClick()
-        if (buttonState == ButtonState.Clicked && !MainActivity.URL.isEmpty()) {
+        if (buttonState == ButtonState.Clicked && !Util.getUrl().isEmpty()) {
             buttonState = ButtonState.Loading
             startAnimation()
         }else{
