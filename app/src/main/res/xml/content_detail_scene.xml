@@ -20,6 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:rotationX="0"
+            android:rotationY="360"
             android:layout_marginTop="20dp"
             android:textAlignment="gravity"
             motion:layout_constraintBottom_toTopOf="@+id/okBtn"
